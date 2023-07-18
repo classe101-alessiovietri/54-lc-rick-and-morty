@@ -9,7 +9,9 @@ export default {
         }
     },
     methods: {
-
+        // testSottomissioneForm() {
+        //     console.log('SI');
+        // }
     }
 }
 </script>
@@ -27,17 +29,17 @@ export default {
 
             <div class="row">
                 <div class="col">
-                    <form action="">
+                    <form action="" @submit.prevent="$emit('search')">
                         <div class="row justify-content-center">
                             <div class="col-auto">
                                 <input v-model="store.searchText" type="text" class="form-control" id="character-name" placeholder="Search character by name...">
                             </div>
                             <div class="col-auto">
-                                <select class="form-select" aria-label="Select a status">
-                                    <option selected>Select status...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select v-model="store.searchStatus" class="form-select" aria-label="Select a status">
+                                    <option value="" selected>Select status...</option>
+                                    <option value="alive">Alive</option>
+                                    <option value="dead">Dead</option>
+                                    <option value="unknown">Unknown</option>
                                 </select>
                             </div>
                             <div class="col-auto">
@@ -51,7 +53,6 @@ export default {
                                 </button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

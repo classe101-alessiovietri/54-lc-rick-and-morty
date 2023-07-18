@@ -17,20 +17,37 @@ export default {
             store
         };
     },
-    methods: {},
+    methods: {
+        getResults() {
+            axios
+                .get('https://rickandmortyapi.com/api/character', {
+                    params: {
+                        name: this.store.searchText,
+                        status: this.store.searchStatus
+                    }
+                })
+                .then(response => {
+                    console.log(response.data.results);
+                    this.store.characters = response.data.results;
+                })
+                .catch(error => {
+                    console.log('Errore nella chiamata');
+                    this.store.characters = [];
+                });
+        },
+        performSearch() {
+            console.log('Intercettato evento search');
+            this.getResults();
+        }     
+    },
     created() {
-        axios
-            .get('https://rickandmortyapi.com/api/character')
-            .then(response => {
-                console.log(response.data.results);
-                this.store.characters = response.data.results;
-            });
+        this.getResults();
     }
 };
 </script>
 
 <template>
-    <HeaderComponent />
+    <HeaderComponent @search="performSearch()" />
 
     <MainComponent />
 
